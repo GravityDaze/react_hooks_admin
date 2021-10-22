@@ -1,0 +1,29 @@
+.bkg{
+    background:url(https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01780e59391564a8012193a37223ea.jpg&refer=http%3A%2F%2Fimg.zcool.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1634528006&t=08ffc3d6d25b3699efa7c850e5ef7c15) no-repeat center;
+    background-size: cover;
+    height:100%;
+}
+
+.wrapper{
+    position:fixed;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    background:rgba(255,255,255,.9);
+    /* height:400px; */
+    width:600px;
+    display:flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    padding:100px 50px;
+}
+
+.wrapper .title{
+    padding-bottom:20px;
+    font-size:30px;
+}
+
+.login-form{
+    width:100%;
+}
