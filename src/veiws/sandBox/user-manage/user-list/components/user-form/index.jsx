@@ -4,22 +4,6 @@ import { Form, Input, Select, Modal } from 'antd'
 
 export default ({ visible, onOk, onCancel, currentUser, title,regions,roles }) => {
 
-    // 对区域进行权限过滤
-    const rightMap = new Map([
-        [ 1, '超级管理员'],
-        [ 2, '区域管理员'],
-        [ 3, '区域编辑'],
-    ])
-    const { role:{ id },region }  = JSON.parse(localStorage.getItem('token'))
-    const handleRegionRight = title =>{
-        console.log(region,title)
-        if( region === '超级管理员' ){
-            return false
-        }else{
-            return title === region
-        }
-    }   
-
     // 表单数据
     const [form] = Form.useForm();
 
@@ -42,6 +26,8 @@ export default ({ visible, onOk, onCancel, currentUser, title,regions,roles }) =
  
 
      // 监听对话框打开时回填数据
+
+     
      useEffect(() => {
         if (visible) {  
             form.setFieldsValue(currentUser)

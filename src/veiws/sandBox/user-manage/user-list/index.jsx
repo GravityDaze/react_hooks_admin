@@ -50,29 +50,29 @@ export default () => {
     // 表单回填数据
     const [currentUser, setcurrentUser] = useState(null)
 
+    // 获取到该用户的权限用于鉴权
+    const rightMap = new Map([
+        [ 1, '超级管理员'],
+        [ 2, '区域管理员'],
+        [ 3, '区域编辑'],
+    ])
+    const { role:{ roleName },roleId,region } = JSON.parse( localStorage.getItem('token') )
+
     const getTableData = async () => {
         const res = await axios.get('http://localhost:5000/users?_expand=role')
         // 获取到该用户的权限
-        const { role:{ roleName },roleId } = JSON.parse( localStorage.getItem('token') )
-        setDataSource(res.data.filter( v=>{
-            if( roleId === 1 ){
-                return true
-            }else{
-                return v.role.roleName = roleName
-            }
-        } ))
+        setDataSource(res.data.filter(v=>rightMap.get(roleId) === '超级管理员' || ( rightMap.get(v.roleId) === '区域编辑' && v.region === region )))
     }
 
     // 获取到下拉框的区域和角色数据
     const getRegions = async () => {
         const res = await axios.get('http://localhost:5000/regions')
-        setRegions(res.data)
+        setRegions(res.data.filter(v=> rightMap.get(roleId) === '超级管理员' || v.title === region))
     }
 
     const getRoles = async () => {
         const res = await axios.get('http://localhost:5000/roles')
-        console.log(res.data)
-        setRoles(res.data)
+        setRoles(res.data.filter(v=> rightMap.get(roleId) === '超级管理员' || rightMap.get(v.id) === '区域编辑'))
     }
 
     // 获取表格和表单数据
@@ -108,6 +108,7 @@ export default () => {
 
     // 新建用户
     const addUser = async values => {
+        console.log(values)
         await axios.post('http://localhost:5000/users', {
             ...values,
             roleState: true,
@@ -166,7 +167,7 @@ export default () => {
     return (
         <Fragment>
             <Space direction="vertical" style={{ width: '100%' }}>
-                <Button type="primary" onClick={() => openModal({}, '新建')}>添加用户</Button>
+                <Button type="primary" onClick={() => openModal({}, '新增')}>添加用户</Button>
                 <Table
                     rowKey={item => item.id}
                     dataSource={dataSource}

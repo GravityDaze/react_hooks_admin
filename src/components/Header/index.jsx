@@ -40,7 +40,7 @@ export default withRouter((props) => {
                     <span>欢迎{username}回来</span>
                     <Dropdown overlay={menu}>
                         <Avatar icon={<UserOutlined />} />
-                    </Dropdown>,
+                    </Dropdown>
                 </div>
             </div>
         </Header>
