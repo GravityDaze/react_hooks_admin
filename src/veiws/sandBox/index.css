@@ -18,6 +18,7 @@
   
   .site-layout .site-layout-background {
     background: #fff;
+    overflow: auto;
   }
 
   #root,.ant-layout{

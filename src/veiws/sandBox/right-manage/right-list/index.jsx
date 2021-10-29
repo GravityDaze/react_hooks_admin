@@ -48,7 +48,7 @@ export default () => {
   }, [])
 
   const getTableData = async () => {
-    const res = await axios.get('http://localhost:5000/rights?_embed=children')
+    const res = await axios.get('/rights?_embed=children')
     setDataSource(res.data.map(v => {
       if (!v.children?.length) {
         const { children, ...rest } = v
@@ -73,7 +73,7 @@ export default () => {
   }
 
   const deleteMethod = async item => {
-    await axios.delete(`http://localhost:5000/children/${item.id}`)
+    await axios.delete(`/children/${item.id}`)
     getTableData()
   }
 
@@ -92,7 +92,7 @@ export default () => {
   }
 
   const updateBackEndStatus = async ({id,pagepermisson}) => {
-    await axios.patch( `http://localhost:5000/rights/${id}`,{ pagepermisson:!pagepermisson } )
+    await axios.patch( `/rights/${id}`,{ pagepermisson:!pagepermisson } )
   }
 
 

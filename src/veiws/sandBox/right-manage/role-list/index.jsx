@@ -42,7 +42,7 @@ export default () => {
     }, [])
 
     const getTableData = async () => {
-        const res = await axios.get('http://localhost:5000/roles')
+        const res = await axios.get('/roles')
         setDataSource(res.data)
     }
 
@@ -78,7 +78,7 @@ export default () => {
 
     // 获取到权限数据
     const getRightData = async () => {
-        const res = await axios.get('http://localhost:5000/rights?_embed=children')
+        const res = await axios.get('/rights?_embed=children')
         setTreeData(res.data)
     }
 
@@ -103,7 +103,7 @@ export default () => {
             return v
         }))
         // 更新后端数据
-        await axios.patch(`http://localhost:5000/roles/${currentId}`, {
+        await axios.patch(`/roles/${currentId}`, {
             rights: [...currentRights, ...halfChecked]
         })
         setIsModalVisible(false);

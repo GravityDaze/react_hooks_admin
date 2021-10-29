@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import { Form, Input, Select, Modal } from 'antd'
 
 export default ({ visible, onOk, onCancel, currentUser, title,regions,roles }) => {
@@ -26,8 +25,6 @@ export default ({ visible, onOk, onCancel, currentUser, title,regions,roles }) =
  
 
      // 监听对话框打开时回填数据
-
-     
      useEffect(() => {
         if (visible) {  
             form.setFieldsValue(currentUser)

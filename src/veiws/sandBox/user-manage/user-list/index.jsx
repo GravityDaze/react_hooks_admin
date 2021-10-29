@@ -59,19 +59,19 @@ export default () => {
     const { role:{ roleName },roleId,region } = JSON.parse( localStorage.getItem('token') )
 
     const getTableData = async () => {
-        const res = await axios.get('http://localhost:5000/users?_expand=role')
+        const res = await axios.get('/users?_expand=role')
         // 获取到该用户的权限
         setDataSource(res.data.filter(v=>rightMap.get(roleId) === '超级管理员' || ( rightMap.get(v.roleId) === '区域编辑' && v.region === region )))
     }
 
     // 获取到下拉框的区域和角色数据
     const getRegions = async () => {
-        const res = await axios.get('http://localhost:5000/regions')
+        const res = await axios.get('/regions')
         setRegions(res.data.filter(v=> rightMap.get(roleId) === '超级管理员' || v.title === region))
     }
 
     const getRoles = async () => {
-        const res = await axios.get('http://localhost:5000/roles')
+        const res = await axios.get('/roles')
         setRoles(res.data.filter(v=> rightMap.get(roleId) === '超级管理员' || rightMap.get(v.id) === '区域编辑'))
     }
 
@@ -109,7 +109,7 @@ export default () => {
     // 新建用户
     const addUser = async values => {
         console.log(values)
-        await axios.post('http://localhost:5000/users', {
+        await axios.post('/users', {
             ...values,
             roleState: true,
             default: false
@@ -120,7 +120,7 @@ export default () => {
 
     // 编辑用户
     const editUser = async values => {
-        await axios.patch(`http://localhost:5000/users/${currentUser.id}`, values)
+        await axios.patch(`/users/${currentUser.id}`, values)
         getTableData()
         setVisible(false)
     }
@@ -141,7 +141,7 @@ export default () => {
     }
 
     const deletUser = async item => {
-        await axios.delete(`http://localhost:5000/users/${item.id}`)
+        await axios.delete(`/users/${item.id}`)
         getTableData()
     }
 
@@ -160,7 +160,7 @@ export default () => {
     }
 
     const updateBackEndStatus = async ({ id }, roleState) => {
-        await axios.patch(`http://localhost:5000/users/${id}`, { roleState })
+        await axios.patch(`/users/${id}`, { roleState })
     }
 
 

@@ -16,7 +16,7 @@ export default withRouter(props => {
   // 获取菜单数据
   const [menu, setMenu] = useState([])
   const getMenuData = async () => {
-    const res = await axios.get(' http://localhost:5000/rights?_embed=children')
+    const res = await axios.get('/rights?_embed=children')
     setMenu(res.data )
   }
  

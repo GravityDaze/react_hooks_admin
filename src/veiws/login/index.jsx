@@ -8,7 +8,7 @@ export default (props) => {
 
     const onFinish = async values => {
         const { username,password } = values
-        const res = await axios.get(`http://localhost:5000/users?username=${username}&password=${password}&roleState=true&_expand=role`)
+        const res = await axios.get(`/users?username=${username}&password=${password}&roleState=true&_expand=role`)
         if(res.data.length){
             // 登录成功
             message.success('登陆成功')
